@@ -1,14 +1,17 @@
 [tool.poetry]
-name = "testing-exercises"
+name = "testing_exercises"
 version = "0.1.0"
 description = ""
 authors = ["denis sergeevich pekshev <pekshev.ds@gmail.com>"]
+license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-pytest = "7.2.1"
 
+[tool.poetry.dev-dependencies]
+pytest = "^8.3.2"
+mypy = "^1.11.2"
 
 [build-system]
 requires = ["poetry-core"]
