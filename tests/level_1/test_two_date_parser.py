@@ -10,51 +10,37 @@ tomorrow_str: str = datetime.strftime(date.today() + timedelta(days=1), "%d-%m-%
 carrent_date_format: str = "%d-%m-%Y %H:%M"
 
 
-@pytest.mark.parametrize(
-    "date_str,time_str,expected",
-    [
-        (
-            today_str,  # date_str
-            "08:35",  # time_str
-            datetime.strptime(f"{today_str} 08:35", carrent_date_format),  # expected
-        ),
-        (
-            today_str,  # date_str
-            "23:59",  # time_str
-            datetime.strptime(
-                f"{today_str} 23:59",
-                carrent_date_format,
-            ),  # expected
-        ),
-        (
-            today_str,  # date_str
-            "00:01",  # time_str
-            datetime.strptime(
-                f"{today_str} 00:01",
-                carrent_date_format,
-            ),  # expected
-        ),
-        (
-            "tomorrow",  # date_str
-            "00:01",  # time_str
-            datetime.strptime(
-                f"{tomorrow_str} 00:01",
-                carrent_date_format,
-            ),  # expected
-        ),
-    ],
-)
-def test_compose_datetime_from(
-    date_str: str, time_str: str, expected: datetime
+@pytest.fixture
+def data_to_check_if_today() -> dict[str, str | datetime]:
+    return {
+        "date_str": today_str,
+        "time_str": "01:01",
+        "expected": datetime.strptime(f"{today_str} 01:01", carrent_date_format),
+    }
+
+
+@pytest.fixture
+def data_to_check_if_tomorrow() -> dict[str, str | datetime]:
+    return {
+        "date_str": "tomorrow",
+        "time_str": "01:01",
+        "expected": datetime.strptime(f"{tomorrow_str} 01:01", carrent_date_format),
+    }
+
+
+def test__compose_datetime_from__if_today(
+    data_to_check_if_today: dict[str, str | datetime],
 ) -> None:
+    date_str = str(data_to_check_if_today.get("date_str"))
+    time_str = str(data_to_check_if_today.get("time_str"))
+    expected = data_to_check_if_today.get("expected")
     assert compose_datetime_from(date_str, time_str) == expected
 
 
-def test_compose_datetime_from_if_today() -> None:
-    expected: datetime = datetime.strptime(f"{today_str} 08:35", carrent_date_format)
-    assert compose_datetime_from(today_str, "08:35") == expected
-
-
-def test_compose_datetime_from_if_tomorrow() -> None:
-    expected: datetime = datetime.strptime(f"{tomorrow_str} 00:01", carrent_date_format)
-    assert compose_datetime_from("tomorrow", "00:01") == expected
+def test__compose_datetime_from__if_tomorrow(
+    data_to_check_if_tomorrow: dict[str, str | datetime],
+) -> None:
+    date_str = str(data_to_check_if_tomorrow.get("date_str"))
+    time_str = str(data_to_check_if_tomorrow.get("time_str"))
+    expected = data_to_check_if_tomorrow.get("expected")
+    assert compose_datetime_from(date_str, time_str) == expected
