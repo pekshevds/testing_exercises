@@ -31,7 +31,7 @@ def expense2(bank_cards: list[BankCard]) -> Expense:
         amount=decimal.Decimal(168.5),
         currency=Currency.RUB,
         card=bank_cards[1],
-        spent_in="pharmacy",
+        spent_in="pharm",
         spent_at=datetime.datetime.strptime("21.09.24", "%d.%m.%y"),
         category=ExpenseCategory.MEDICINE_PHARMACY,
     )
