@@ -6,4 +6,4 @@ from functions.level_3.models import Expense
 def test__calculate_average_daily_expenses__check_value_equal_expected(
     expenses: list[Expense],
 ) -> None:
-    assert calculate_average_daily_expenses(expenses) == decimal.Decimal(239.5)
+    assert calculate_average_daily_expenses(expenses) == decimal.Decimal("215.8")

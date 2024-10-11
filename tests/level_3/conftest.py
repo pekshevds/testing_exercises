@@ -16,7 +16,7 @@ def bank_cards() -> list[BankCard]:
 @pytest.fixture
 def expense1(bank_cards: list[BankCard]) -> Expense:
     return Expense(
-        amount=decimal.Decimal(10.5),
+        amount=decimal.Decimal("10.5"),
         currency=Currency.RUB,
         card=bank_cards[0],
         spent_in="cafe",
@@ -28,7 +28,7 @@ def expense1(bank_cards: list[BankCard]) -> Expense:
 @pytest.fixture
 def expense2(bank_cards: list[BankCard]) -> Expense:
     return Expense(
-        amount=decimal.Decimal(168.5),
+        amount=decimal.Decimal("168.5"),
         currency=Currency.RUB,
         card=bank_cards[1],
         spent_in="pharm",
@@ -40,19 +40,51 @@ def expense2(bank_cards: list[BankCard]) -> Expense:
 @pytest.fixture
 def expense3(bank_cards: list[BankCard]) -> Expense:
     return Expense(
-        amount=decimal.Decimal(300.0),
+        amount=decimal.Decimal("300.0"),
         currency=Currency.RUB,
         card=bank_cards[2],
-        spent_in="food and vine",
-        spent_at=datetime.datetime.strptime("21.09.24", "%d.%m.%y"),
-        category=ExpenseCategory.BAR_RESTAURANT,
+        spent_in="netflix",
+        spent_at=datetime.datetime.strptime("20.09.24", "%d.%m.%y"),
+        category=ExpenseCategory.ONLINE_SUBSCRIPTIONS,
     )
 
 
 @pytest.fixture
-def expenses(expense1: Expense, expense2: Expense, expense3: Expense) -> list[Expense]:
+def expense4(bank_cards: list[BankCard]) -> Expense:
+    return Expense(
+        amount=decimal.Decimal("300.0"),
+        currency=Currency.RUB,
+        card=bank_cards[2],
+        spent_in="netflix",
+        spent_at=datetime.datetime.strptime("20.08.24", "%d.%m.%y"),
+        category=ExpenseCategory.ONLINE_SUBSCRIPTIONS,
+    )
+
+
+@pytest.fixture
+def expense5(bank_cards: list[BankCard]) -> Expense:
+    return Expense(
+        amount=decimal.Decimal("300.0"),
+        currency=Currency.RUB,
+        card=bank_cards[2],
+        spent_in="netflix",
+        spent_at=datetime.datetime.strptime("20.07.24", "%d.%m.%y"),
+        category=ExpenseCategory.ONLINE_SUBSCRIPTIONS,
+    )
+
+
+@pytest.fixture
+def expenses(
+    expense1: Expense,
+    expense2: Expense,
+    expense3: Expense,
+    expense4: Expense,
+    expense5: Expense,
+) -> list[Expense]:
     return [
         expense1,
         expense2,
         expense3,
+        expense4,
+        expense5,
     ]
