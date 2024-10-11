@@ -1,1 +1,1 @@
-python -m pytest .\tests\level_1\
+python -m pytest .\tests\level_3\
