@@ -88,3 +88,27 @@ def expenses(
         expense4,
         expense5,
     ]
+
+
+@pytest.fixture
+def expenses_with_fraud(
+    expense1: Expense,
+    expense2: Expense,
+    expense3: Expense,
+    expense4: Expense,
+    expense5: Expense,
+) -> list[Expense]:
+    return [
+        expense1,
+        expense2,
+        expense3,
+        expense4,
+        expense5,
+        expense5,
+        expense5,
+        expense5,
+        expense5,
+        expense5,
+        expense5,
+        expense5,
+    ]
